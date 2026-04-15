@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survival The Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ==============================
+           RESET & GRUNDLAGEN
+        ============================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Barlow', Arial, sans-serif;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* ==============================
+           TYPOGRAFIE
+           Einheitlich für den ganzen Onepager
+        ============================== */
+        h2 {
+            font-family: 'Bebas Neue', Arial, sans-serif;
+            font-size: 42px;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h3 {
+            font-family: 'Bebas Neue', Arial, sans-serif;
+            font-size: 28px;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        a {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* ==============================
+           NAVIGATION
+        ============================== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            padding: 10px 0;
+            z-index: 1000;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 24px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: black;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                gap: 0;
+                display: none;
+                padding: 20px 0;
+                border-top: 1px solid #ddd;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-menu a {
+                display: block;
+                padding: 15px;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        /* ==============================
+           SEKTIONEN – Grundlayout
+        ============================== */
+        section {
+            padding: 80px 20px 60px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ==============================
+           SPLASH / HERO
+        ============================== */
+        #splash {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            padding-top: 60px;
+        }
+
+        .splash-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: fade 15s infinite;
+        }
+
+        .splash-bg:nth-child(1) { background-image: url('../images/sp-01.jpg'); animation-delay: 0s; }
+        .splash-bg:nth-child(2) { background-image: url('../images/sp-02.jpg'); animation-delay: 5s; }
+        .splash-bg:nth-child(3) { background-image: url('../images/sp-03.jpg'); animation-delay: 10s; }
+
+        @keyframes fade {
+            0%, 33.33%  { opacity: 1; }
+            33.34%, 100% { opacity: 0; }
+        }
+
+        .splash-logo {
+            position: relative;
+            z-index: 1;
+            max-width: 80%;
+        }
+
+        .splash-logo img {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+        }
+
+        /* ==============================
+           INTRO
+        ============================== */
+        #intro {
+            gap: 40px;
+        }
+
+        .intro-bild {
+            width: 90%;
+            max-width: 800px;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .intro-bild img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .intro-text {
+            width: 90%;
+            max-width: 800px;
+        }
+
+        /* ==============================
+           AKTIVITÄTEN
+        ============================== */
+        .fit-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 15px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .fit-item {
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 36px;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .fit-item:hover {
+            transform: scale(1.05);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* ==============================
+           SPIELMACHER
+        ============================== */
+        .spielmacher-grid {
+            display: flex;
+            gap: 30px;
+            width: 90%;
+            max-width: 1200px;
+        }
+
+        .spielmacher-karte {
+            flex: 1;
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .spielmacher-karte img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            border-radius: 5px;
+            display: block;
+        }
+
+        .spielmacher-name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .spielmacher-titel {
+            font-size: 18px;
+            font-style: italic;
+        }
+
+        .spielmacher-beschreibung {
+            font-size: 14px;
+        }
+
+        .spielmacher-kontakt {
+            font-size: 13px;
+            line-height: 1.8;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+
+        /* ==============================
+           REZENSIONEN
+        ============================== */
+        .rezension {
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            height: 220px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            transition: opacity 1s;
+            overflow: hidden;
+        }
+
+        .rezension-foto {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .rezension-inhalt {
+            text-align: center;
+        }
+
+        .rezension p {
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+
+        .rezension-autor {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* ==============================
+           ANMELDUNG
+        ============================== */
+        #anmeldung {
+            transition: background-color 0.4s ease;
+        }
+
+        #anmeldung.aktiv {
+            background-color: #f5f5f5;
+        }
+
+        .anmeldung-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: 2px solid black;
+            background: transparent;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .tab-btn:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-btn.aktiv {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        .formular {
+            width: 90%;
+            max-width: 800px;
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 40px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .formular.aktiv {
+            display: block;
+        }
+
+        .feld {
+            margin-bottom: 20px;
+        }
+
+        .feld label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .feld input[type="text"],
+        .feld input[type="email"],
+        .feld input[type="tel"],
+        .feld input[type="number"],
+        .feld textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            background: white;
+        }
+
+        .feld textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .feld label.checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .feld label.checkbox input {
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .pflichtfeld {
+            color: #ffcc00;
+        }
+
+        .formular-hinweis {
+            font-size: 13px;
+            margin-bottom: 20px;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+        .absenden {
+            width: 100%;
+            padding: 12px;
+            background-color: #ffcc00;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .absenden:hover {
+            background-color: #ffdd44;
+        }
+
+        /* ==============================
+           FAQ
+        ============================== */
+        #faq {
+            background-color: #f0f0f0;
+        }
+
+        .faq-container {
+            width: 90%;
+            max-width: 800px;
+        }
+
+        details {
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        summary {
+            padding: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 18px;
+            list-style: none;
+            position: relative;
+        }
+
+        summary::after {
+            content: '+';
+            position: absolute;
+            right: 20px;
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        details[open] summary::after {
+            content: '−';
+        }
+
+        details p {
+            padding: 0 20px 20px;
+            margin-bottom: 0;
+        }
+
+        /* ==============================
+           SPONSOR
+        ============================== */
+        #sponsor {
+            padding: 20px 20px 50px;
+            background-color: #f0f0f0;
+        }
+
+        #sponsor img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ==============================
+           ZACKEN-TRENNER
+        ============================== */
+        .zacken-trenner {
+            display: block;
+            line-height: 0;
+            background-color: #f0f0f0; /* Farbe der Sektion davor (Sponsor) */
+        }
+
+        .zacken-trenner svg {
+            display: block;
+            width: 100%;
+            height: 35px;
+        }
+
+        /* ==============================
+           FOOTER
+        ============================== */
+        footer {
+            background-color: #b86827;
+            color: white;
+            padding: 40px 20px 20px;
+            font-size: 15px;
+        }
+
+        .footer-top {
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto 30px;
+        }
+
+        .footer-block {
+            line-height: 2;
+        }
+
+        .footer-block a {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-block a:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-logo img,
+        .footer-spiel-logo img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+        }
+
+        .footer-legal {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .legal-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .legal-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+            cursor: pointer;
+            padding: 0;
+            transition: color 0.3s;
+        }
+
+        .legal-btn:hover,
+        .legal-btn.aktiv {
+            color: white;
+        }
+
+        .legal-trenner {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 13px;
+        }
+
+        .legal-panel {
+            background-color: rgba(0, 0, 0, 0.12);
+            border-radius: 8px;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .legal-panel.offen {
+            display: block;
+        }
+
+        .legal-inhalt {
+            padding: 20px 25px 25px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .legal-inhalt p {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .legal-inhalt strong {
+            display: block;
+            color: white;
+            margin-top: 15px;
+            margin-bottom: 4px;
+        }
+
+        .legal-inhalt a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .footer-logos {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto 20px;
+        }
+
+        .footer-unten {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            padding-top: 15px;
+            text-align: center;
+        }
+
+        .footer-copyright {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+            text-align: center;
+        }
+
+        .footer-copyright a {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .footer-copyright a:hover {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* ==============================
+           MOBILE (max 768px)
+        ============================== */
+        @media (max-width: 768px) {
+
+            /* Navigation – Hamburger sicherstellen */
+            .nav-container {
+                justify-content: space-between;
+            }
+
+            .hamburger {
+                display: flex;
+                order: 2;
+            }
+
+            /* Splash – auf Mobile etwas kürzer */
+            #splash {
+                height: 60vh;
+                min-height: 250px;
+            }
+
+            /* Intro – Bild weniger hoch */
+            .intro-bild {
+                height: 200px;
+            }
+
+            /* Aktivitäten – 5 Spalten */
+            .fit-grid {
+                grid-template-columns: repeat(5, 1fr);
+                width: 95%;
+            }
+
+            /* Spielmacher – untereinander */
+            .spielmacher-grid {
+                flex-direction: column;
+                width: 95%;
+            }
+
+            /* Formular – weniger Innenabstand */
+            .formular {
+                padding: 25px 20px;
+            }
+
+            /* Anmeldung Buttons */
+            .anmeldung-tabs {
+                flex-direction: column;
+                width: 95%;
+            }
+
+            .tab-btn {
+                width: 100%;
+            }
+
+            /* Footer – Textblöcke untereinander */
+            .footer-top {
+                flex-direction: column;
+                gap: 25px;
+            }
+
+            .footer-logos {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <button class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="#splash">Home</a></li>
+                <li><a href="#spielmacher">Spielmacher</a></li>
+                <li><a href="#anmeldung">Anmeldung</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero / Splash -->
+    <section id="splash">
+        <div class="splash-bg"></div>
+        <div class="splash-bg"></div>
+        <div class="splash-bg"></div>
+        <div class="splash-logo">
+            <img src="../images/logo.png" alt="Survival The Game Logo">
+        </div>
+    </section>
+
+    <!-- Intro -->
+    <section id="intro">
+        <div class="intro-bild">
+            <img src="../images/intro.jpg" alt="Einführungsbild">
+        </div>
+        <div class="intro-text">
+            <h2 style="text-align: left;">Survival The Game.</h2>
+            <p><em>Die Spiele von damals. Nur intensiver.</em></p>
+            <p>Sind Begriffe wie Mattenlauf, Keulenvölk, Burgenvölk, Fussball, Unihockey, Kettenfangis, Panterball, Affenfangis, «Alle gegen alle» American Style, Faustball oder «Wer hat Angst vor dem grünen Staubsauger» keine Fremdwörter für dich?</p>
+            <p><strong>Du bist über 16 Jahre alt?</strong> Dann komm zu <strong>Survival The Game</strong> – jeden Dienstag Abend im Schulhaus Ruggächer.</p>
+        </div>
+    </section>
+
+    <!-- Aktivitäten -->
+    <section id="fit">
+        <h2>Aktivitäten</h2>
+        <div class="fit-grid">
+            <div class="fit-item">🎯</div>
+            <div class="fit-item">⚽</div>
+            <div class="fit-item">🏀</div>
+            <div class="fit-item">🎲</div>
+            <div class="fit-item">🏓</div>
+            <div class="fit-item">🏸</div>
+            <div class="fit-item">🎳</div>
+            <div class="fit-item">🏐</div>
+            <div class="fit-item">🏈</div>
+            <div class="fit-item">⚾</div>
+            <div class="fit-item">🎾</div>
+            <div class="fit-item">🏒</div>
+            <div class="fit-item">🏑</div>
+            <div class="fit-item">🏉</div>
+            <div class="fit-item">🥍</div>
+            <div class="fit-item">🏹</div>
+            <div class="fit-item">🎣</div>
+            <div class="fit-item">⛷️</div>
+            <div class="fit-item">🏂</div>
+            <div class="fit-item">🛷</div>
+            <div class="fit-item">🏊</div>
+        </div>
+    </section>
+
+    <!-- Spielmacher -->
+    <section id="spielmacher">
+        <h2>Die Spielmacher</h2>
+        <div class="spielmacher-grid">
+            <div class="spielmacher-karte">
+                <img src="../images/macher-1.jpg" alt="Spielmacher Lukas">
+                <div class="spielmacher-name">Lukas</div>
+                <div class="spielmacher-titel">Der Zerstörer</div>
+                <div class="spielmacher-beschreibung">Er macht einfach alles mit.</div>
+                <div class="spielmacher-kontakt">
+                    <div><a href="mailto:survivalthegame@tva-affoltern.ch">survivalthegame@tva-affoltern.ch</a></div>
+                    <div><a href="tel:+41798424227">+41 79 842 42 27</a></div>
+                </div>
+            </div>
+            <div class="spielmacher-karte">
+                <img src="../images/macher-2.jpg" alt="Spielmacher David">
+                <div class="spielmacher-name">David</div>
+                <div class="spielmacher-titel">Der Kämpfer</div>
+                <div class="spielmacher-beschreibung">Immer für Action zu haben.</div>
+                <div class="spielmacher-kontakt">
+                    <div><a href="mailto:survivalthegame@tva-affoltern.ch">survivalthegame@tva-affoltern.ch</a></div>
+                    <div><a href="tel:+41767404622">+41 76 740 46 22</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rezensionen -->
+    <section id="rezensionen">
+        <h2>Rezensionen</h2>
+        <div class="rezension">
+            <div class="rezension-foto">👤</div>
+            <div class="rezension-inhalt">
+                <p>Ein super Erlebnis! Die Spiele waren spannend und die Atmosphäre toll.</p>
+                <div class="rezension-autor">– Max Müller</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Anmeldung -->
+    <section id="anmeldung">
+        <h2>Anmeldung</h2>
+        <div class="anmeldung-tabs">
+            <button class="tab-btn" onclick="wechsleFormular('definitiv')">Definitiv anmelden</button>
+            <button class="tab-btn" onclick="wechsleFormular('schnuppern')">Zum Schnuppern</button>
+        </div>
+
+        <!-- Definitiv anmelden -->
+        <div id="definitiv-form" class="formular">
+            <h3>Definitiv anmelden</h3>
+            <form>
+                <div class="feld">
+                    <label for="name1">Name <span class="pflichtfeld">*</span></label>
+                    <input type="text" id="name1" name="name" required>
+                </div>
+                <div class="feld">
+                    <label for="vorname1">Vorname <span class="pflichtfeld">*</span></label>
+                    <input type="text" id="vorname1" name="vorname" required>
+                </div>
+                <div class="feld">
+                    <label for="adresse1">Adresse <span class="pflichtfeld">*</span></label>
+                    <input type="text" id="adresse1" name="adresse" required>
+                </div>
+                <div class="feld">
+                    <label for="telefon1">Telefonnummer <span class="pflichtfeld">*</span></label>
+                    <input type="tel" id="telefon1" name="telefon" required>
+                </div>
+                <div class="feld">
+                    <label for="email1">E-Mail <span class="pflichtfeld">*</span></label>
+                    <input type="email" id="email1" name="email" required>
+                </div>
+                <div class="feld">
+                    <label for="alter1">Alter <span class="pflichtfeld">*</span></label>
+                    <input type="number" id="alter1" name="alter" required>
+                </div>
+                <div class="feld">
+                    <label class="checkbox">
+                        <input type="checkbox" name="storno">
+                        Ich akzeptiere allfällige Stornogebühren
+                    </label>
+                </div>
+                <div class="feld">
+                    <label class="checkbox">
+                        <input type="checkbox" name="zahlung" required>
+                        Ich werde die Kosten von CHF 215.– fristgerecht bezahlen <span class="pflichtfeld">*</span>
+                    </label>
+                </div>
+                <div class="feld">
+                    <label class="checkbox">
+                        <input type="checkbox" name="versicherung" required>
+                        Die Versicherung ist Sache der Teilnehmenden <span class="pflichtfeld">*</span>
+                    </label>
+                </div>
+                <div class="feld">
+                    <label for="nachricht1">Nachricht</label>
+                    <textarea id="nachricht1" name="nachricht"></textarea>
+                </div>
+                <div class="feld">
+                    <label class="checkbox">
+                        <input type="checkbox" name="datenschutz" required>
+                        Es gilt unsere <a href="#" onclick="oeffneDatenschutz(); return false;">Datenschutzerklärung</a> <span class="pflichtfeld">*</span>
+                    </label>
+                </div>
+                <div class="formular-hinweis">
+                    <strong>Hinweis:</strong> Bitte alle mit <span class="pflichtfeld">*</span> gekennzeichneten Felder ausfüllen.
+                </div>
+                <button type="submit" class="absenden">Anmelden</button>
+            </form>
+        </div>
+
+        <!-- Zum Schnuppern -->
+        <div id="schnuppern-form" class="formular">
+            <h3>Zum Schnuppern anmelden</h3>
+            <form>
+                <div class="feld">
+                    <label for="name2">Name <span class="pflichtfeld">*</span></label>
+                    <input type="text" id="name2" name="name" required>
+                </div>
+                <div class="feld">
+                    <label for="vorname2">Vorname <span class="pflichtfeld">*</span></label>
+                    <input type="text" id="vorname2" name="vorname" required>
+                </div>
+                <div class="feld">
+                    <label for="email2">E-Mail <span class="pflichtfeld">*</span></label>
+                    <input type="email" id="email2" name="email" required>
+                </div>
+                <div class="feld">
+                    <label for="telefon2">Telefonnummer <span class="pflichtfeld">*</span></label>
+                    <input type="tel" id="telefon2" name="telefon" required>
+                </div>
+                <div class="feld">
+                    <label for="nachricht2">Nachricht</label>
+                    <textarea id="nachricht2" name="nachricht"></textarea>
+                </div>
+                <div class="feld">
+                    <label class="checkbox">
+                        <input type="checkbox" name="datenschutz" required>
+                        Es gilt unsere <a href="#" onclick="oeffneDatenschutz(); return false;">Datenschutzerklärung</a> <span class="pflichtfeld">*</span>
+                    </label>
+                </div>
+                <div class="formular-hinweis">
+                    <strong>Hinweis:</strong> Bitte alle mit <span class="pflichtfeld">*</span> gekennzeichneten Felder ausfüllen.
+                </div>
+                <button type="submit" class="absenden">Anmelden</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="faq-container">
+            <h2>FAQ</h2>
+            <details>
+                <summary>Spielzeiten</summary>
+                <p>Dienstag, 20:00–21:30 Uhr im Schulhaus Ruggächer, Mühlackerstrasse 90, 8046 Zürich.</p>
+            </details>
+            <details>
+                <summary>Standort</summary>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1053.9701163135737!2d8.503709471770978!3d47.424079797064024!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47900b196ab6cf49%3A0xa335a48fc8088f27!2sSchulhaus%20Ruggaecher%2C%20M%C3%BChlackerstrasse%2090%2C%208046%20Z%C3%BCrich!5e1!3m2!1sde!2sch!4v1776203583854!5m2!1sde!2sch" width="100%" height="450" style="border:0; display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </details>
+            <details>
+                <summary>Kosten</summary>
+                <p>Die Kosten betragen CHF 215.– pro Jahr. Mit der Einzahlung wirst du automatisch Mitglied im TV ZH Affoltern.</p>
+            </details>
+            <details>
+                <summary>Auszeit / Schulferien</summary>
+                <p>Während der Schulferien finden keine Sessions statt.</p>
+            </details>
+            <details>
+                <summary>Was soll ich mitbringen?</summary>
+                <p>Turnkleidung<br>Hallenschuhe<br>Wasserflasche<br>Duschsachen (die Dusche darf benutzt werden)</p>
+            </details>
+            <details>
+                <summary>Werde ich schwitzen?</summary>
+                <p>Ja! Es wird intensiv, und du wirst am Ende der Session bestimmt ausgepumpt sein.</p>
+            </details>
+        </div>
+    </section>
+
+    <!-- Sponsor -->
+    <section id="sponsor">
+        <img src="../images/sponsor-1.jpg" alt="Sponsor">
+    </section>
+
+    <!-- Gezackter Trenner -->
+    <div class="zacken-trenner">
+        <svg viewBox="0 0 1200 35" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,15 Q100,3 200,15 Q300,27 400,15 Q500,3 600,15 Q700,27 800,15 Q900,3 1000,15 Q1100,27 1200,15 L1200,35 L0,35 Z" fill="#b86827"/>
+        </svg>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+
+        <!-- Textblöcke -->
+        <div class="footer-top">
+            <div class="footer-block">
+                <strong>Kontakt</strong><br>
+                TV-Affoltern Zürich<br>
+                8046 Zürich<br>
+                <a href="mailto:survivalthegame@tva-affoltern.ch">survivalthegame@tva-affoltern.ch</a>
+            </div>
+            <div class="footer-block">
+                <strong>Spielzeiten</strong><br>
+                Dienstag, 20:00–21:30 Uhr<br>
+                im Schulhaus Ruggächer &nbsp;<a href="#faq">Standort</a>
+            </div>
+            <div class="footer-block">
+                <strong>Kosten</strong><br>
+                CHF 215.– pro Jahr<br>
+                inkl. Mitgliedschaft TV ZH Affoltern
+            </div>
+        </div>
+
+        <!-- Logos -->
+        <div class="footer-logos">
+            <div class="footer-logo">
+                <img src="../images/turnverein.png" alt="Turnverein TV-Affoltern">
+            </div>
+            <div class="footer-spiel-logo">
+                <img src="../images/logo.png" alt="Survival The Game Logo">
+            </div>
+        </div>
+
+        <!-- Rechtliches -->
+        <div class="footer-legal">
+            <div class="legal-links">
+                <button class="legal-btn" onclick="zeigeRechtliches('impressum')">Impressum</button>
+                <span class="legal-trenner">|</span>
+                <button class="legal-btn" onclick="zeigeRechtliches('datenschutz')">Datenschutz</button>
+            </div>
+
+            <div id="legal-panel" class="legal-panel">
+                <div id="impressum-inhalt" class="legal-inhalt" style="display: none">
+                    <strong>Kontakt-Adresse</strong>
+                    <p>Turnverein TV-Affoltern<br>Schürliweg 8<br>8046 Zürich<br>Schweiz</p>
+
+                    <strong>E-Mail</strong>
+                    <p><a href="mailto:vorstand@tva-affoltern.ch">vorstand@tva-affoltern.ch</a></p>
+
+                    <strong>Vertretungsberechtigte Person(en)</strong>
+                    <p>Gisela Gottschall<br>Der Vorstand TVA-Affoltern.ch</p>
+
+                    <strong>Haftungsausschluss</strong>
+                    <p>Der Autor übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit, Aktualität, Zuverlässigkeit und Vollständigkeit der Informationen.</p>
+                    <p>Haftungsansprüche gegen den Autor wegen Schäden materieller oder immaterieller Art, welche aus dem Zugriff oder der Nutzung bzw. Nichtnutzung der veröffentlichten Informationen, durch Missbrauch der Verbindung oder durch technische Störungen entstanden sind, werden ausgeschlossen.</p>
+                    <p>Alle Angebote sind unverbindlich. Der Autor behält es sich ausdrücklich vor, Teile der Seiten oder das gesamte Angebot ohne besondere Ankündigung zu verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder endgültig einzustellen.</p>
+
+                    <strong>Haftungsausschluss für Links</strong>
+                    <p>Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres Verantwortungsbereichs. Es wird jegliche Verantwortung für solche Webseiten abgelehnt. Der Zugriff und die Nutzung solcher Webseiten erfolgen auf eigene Gefahr des jeweiligen Nutzers.</p>
+
+                    <strong>Urheberrechte</strong>
+                    <p>Die Urheber- und alle anderen Rechte an Inhalten, Bildern, Fotos oder anderen Dateien auf dieser Website gehören ausschliesslich der juristischen Person Turnverein TV-Affoltern oder den speziell genannten Rechteinhabern. Für die Reproduktion jeglicher Elemente ist die schriftliche Zustimmung des Urheberrechtsträgers im Voraus einzuholen.</p>
+                </div>
+
+                <div id="datenschutz-inhalt" class="legal-inhalt" style="display: none">
+                    <strong>Datenschutzerklärung</strong>
+
+                    <strong>Spamschutz mit Google reCAPTCHA</strong>
+                    <p>Wir haben Google reCAPTCHA in Formularen auf unserer Webseite implementiert, um zu überprüfen, ob die in den Formularen eingegebenen Daten von menschlichen Besuchern stammen oder von Maschinen bzw. automatisierten Programmen («Bots»). Dieses Tool analysiert automatisch das Verhalten der Webseitenbesucher, sobald sie mit der Webseite interagieren, unter Verwendung verschiedener Informationen wie IP-Adresse, Aufenthaltsdauer und Mausbewegungen.</p>
+                    <p>Die verarbeiteten Daten umfassen Nutzungsdaten wie die aufgerufene Webseite, Datum und Uhrzeit des Zugriffs und Mausbewegungen sowie Kommunikationsdaten wie IP-Adressen, Browsertyp und Betriebssystem. Diese Verarbeitung richtet sich an Webseitenbesucher und Nutzer von Online-Diensten.</p>
+                    <p>Der Hauptzweck dieser Verarbeitung besteht darin, den Missbrauch unseres Kontaktformulars zu verhindern und dadurch die Sicherheit zu erhöhen. Die rechtliche Grundlage dafür ist unser berechtigtes Interesse gemäss Art. 6 Abs. 1 S. 1 lit. f. DSGVO.</p>
+                    <p>Die Datenempfänger sind Google Ireland Ltd, Gordon House, Barrow St, Dublin 4, Irland, und unser Webseiten-Hosting-Anbieter. Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-unten">
+            <div class="footer-copyright">
+                copyright by <a href="http://www.tv-affoltern.ch" target="_blank">www.tv-affoltern.ch</a>
+            </div>
+        </div>
+
+    </footer>
+
+    <script>
+        // Datenschutz vom Formular öffnen
+        function oeffneDatenschutz() {
+            zeigeRechtliches('datenschutz');
+            document.querySelector('.footer-legal').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Impressum / Datenschutz einblenden
+        function zeigeRechtliches(typ) {
+            const panel      = document.getElementById('legal-panel');
+            const impressum  = document.getElementById('impressum-inhalt');
+            const datenschutz = document.getElementById('datenschutz-inhalt');
+            const btns       = document.querySelectorAll('.legal-btn');
+
+            const istBereitsOffen = panel.classList.contains('offen') &&
+                                    document.getElementById(typ + '-inhalt').style.display !== 'none';
+
+            if (istBereitsOffen) {
+                panel.classList.remove('offen');
+                btns.forEach(b => b.classList.remove('aktiv'));
+            } else {
+                impressum.style.display  = typ === 'impressum'  ? 'block' : 'none';
+                datenschutz.style.display = typ === 'datenschutz' ? 'block' : 'none';
+                panel.classList.add('offen');
+                btns.forEach(b => b.classList.remove('aktiv'));
+                document.querySelector(`.legal-btn[onclick*="${typ}"]`).classList.add('aktiv');
+            }
+        }
+
+        // Formular-Tabs umschalten
+        function wechsleFormular(typ) {
+            document.getElementById('definitiv-form').classList.remove('aktiv');
+            document.getElementById('schnuppern-form').classList.remove('aktiv');
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('aktiv'));
+
+            if (typ === 'definitiv') {
+                document.getElementById('definitiv-form').classList.add('aktiv');
+                document.querySelectorAll('.tab-btn')[0].classList.add('aktiv');
+            } else {
+                document.getElementById('schnuppern-form').classList.add('aktiv');
+                document.querySelectorAll('.tab-btn')[1].classList.add('aktiv');
+            }
+
+            document.getElementById('anmeldung').classList.add('aktiv');
+        }
+
+        // Rezensionen-Slider
+        const rezensionen = [
+            { text: 'Ein super Erlebnis! Die Spiele waren spannend und die Atmosphäre toll.',         autor: '– Max Müller'    },
+            { text: 'Tolle Organisation und super Spiele. Komme gerne wieder!',                        autor: '– Anna Schmidt'  },
+            { text: 'Sehr unterhaltsam und abwechslungsreich – sehr empfehlenswert!',                  autor: '– Peter Weber'   },
+            { text: 'Die besten Abende seit langem! Viel Action und gute Leute.',                      autor: '– Lisa Meier'    },
+            { text: 'Spannende Spiele in guter Gesellschaft. Ich freue mich jede Woche darauf!',       autor: '– Thomas Bauer'  }
+        ];
+
+        let aktuelleRezension = 0;
+        const rezensionBox = document.querySelector('.rezension');
+
+        function zeigeNaechsteRezension() {
+            rezensionBox.style.opacity = '0';
+            setTimeout(() => {
+                const rez = rezensionen[aktuelleRezension];
+                rezensionBox.querySelector('.rezension-inhalt p').textContent = rez.text;
+                rezensionBox.querySelector('.rezension-autor').textContent = rez.autor;
+                rezensionBox.style.opacity = '1';
+                aktuelleRezension = (aktuelleRezension + 1) % rezensionen.length;
+            }, 500);
+        }
+
+        setInterval(zeigeNaechsteRezension, 5000);
+
+        // Mobile Navigation
+        function toggleMenu() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>
