@@ -21,8 +21,6 @@
             font-family: 'Barlow', Arial, sans-serif;
             line-height: 1.6;
             scroll-behavior: smooth;
-            background-color: #FAFAF7;
-            color: #0D0D14;
         }
 
         /* ==============================
@@ -54,7 +52,7 @@
         }
 
         a {
-            color: #0D0D14;
+            color: black;
             text-decoration: none;
         }
 
@@ -69,10 +67,10 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: #0D0D14;
+            background: white;
             padding: 10px 0;
             z-index: 1000;
-            border-bottom: none;
+            border-bottom: 1px solid #ddd;
         }
 
         .nav-container {
@@ -96,7 +94,6 @@
             display: inline-flex;
             flex-direction: column;
             align-items: center;
-            color: white;
         }
 
         .nav-menu a::after {
@@ -108,14 +105,9 @@
             pointer-events: none;
         }
 
-        .nav-menu a:hover {
-            font-weight: 700;
-            text-decoration: none;
-        }
-
+        .nav-menu a:hover,
         .nav-menu a.aktiv {
             font-weight: 700;
-            color: #B8725A;
             text-decoration: none;
         }
 
@@ -135,25 +127,23 @@
         .hamburger span {
             width: 25px;
             height: 3px;
-            background-color: white;
+            background-color: black;
             margin: 3px 0;
             transition: 0.3s;
         }
 
         @media (max-width: 768px) {
             .nav-menu {
-                position: fixed;
-                top: 0;
+                position: absolute;
+                top: 100%;
                 left: 0;
                 width: 100%;
-                height: 100vh;
-                background: #0D0D14;
+                background: white;
                 flex-direction: column;
                 gap: 0;
                 display: none;
-                align-items: center;
-                justify-content: center;
-                border-top: none;
+                padding: 20px 0;
+                border-top: 1px solid #ddd;
             }
 
             .nav-menu.active {
@@ -167,17 +157,11 @@
 
             .nav-menu a {
                 display: block;
-                padding: 22px 15px;
-                font-size: 28px;
-                font-family: 'Bebas Neue', Arial, sans-serif;
-                letter-spacing: 2px;
+                padding: 15px;
             }
 
             .hamburger {
                 display: flex;
-                position: relative;
-                z-index: 1001;
-                padding: 0 15px;
             }
         }
 
@@ -186,7 +170,7 @@
         ============================== */
         section {
             padding: 80px 20px 60px;
-            background: #FAFAF7;
+            background: white;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -271,55 +255,8 @@
         /* ==============================
            AKTIVITÄTEN
         ============================== */
-        /* Near Black */
         #fit {
-            background-color: #E8E5DC;
-        }
-
-        #fit .fit-item {
-            background-color: rgba(13,13,20,0.06);
-        }
-
-        #fit .fit-item:hover {
-            background-color: rgba(13,13,20,0.12);
-        }
-
-        /* Warm Stone */
-        #spielmacher {
-            background-color: #E8E5DC;
-        }
-
-        /* Sport Blue */
-        #anmeldung {
-            background-color: #4E7896;
-        }
-
-        /* Brand Bronze */
-        #rezensionen {
-            background-color: #B8725A;
-        }
-
-        #rezensionen h2,
-        #rezensionen .rezension p,
-        #rezensionen .rezension-autor {
-            color: #FAFAF7;
-        }
-
-        #rezensionen .rezension {
-            background-color: rgba(0,0,0,0.15);
-        }
-
-        #rezensionen .rezension-foto {
-            background-color: rgba(0,0,0,0.2);
-        }
-
-        /* Warm Stone */
-        #faq {
-            background-color: #FAFAF7;
-        }
-
-        #sponsor {
-            background-color: #FAFAF7;
+            background-color: #f0f0f0;
         }
 
         .fit-grid {
@@ -447,8 +384,12 @@
         /* ==============================
            ANMELDUNG
         ============================== */
-        #anmeldung h2 {
-            color: #FAFAF7;
+        #anmeldung {
+            transition: background-color 0.4s ease;
+        }
+
+        #anmeldung.aktiv {
+            background-color: #f5f5f5;
         }
 
         .anmeldung-tabs {
@@ -461,37 +402,29 @@
             padding: 12px 30px;
             font-size: 16px;
             font-weight: bold;
-            border: 2px solid rgba(255,255,255,0.4);
+            border: 2px solid black;
             background: transparent;
             border-radius: 5px;
             cursor: pointer;
-            color: rgba(255,255,255,0.7);
             transition: all 0.3s;
         }
 
         .tab-btn:hover {
-            border-color: white;
-            color: white;
+            background-color: rgba(0, 0, 0, 0.1);
         }
 
         .tab-btn.aktiv {
-            background-color: #FAFAF7;
-            border-color: #FAFAF7;
-            color: #0D0D14;
-        }
-
-        .formular h3 {
-            color: #FAFAF7;
+            background-color: #2c3e50;
+            color: white;
         }
 
         .formular {
             width: 90%;
             max-width: 800px;
-            background-color: rgba(255,255,255,0.07);
+            background-color: rgba(0, 0, 0, 0.05);
             padding: 40px;
             border-radius: 10px;
             display: none;
-            border: 1px solid rgba(255,255,255,0.1);
         }
 
         .formular.aktiv {
@@ -506,7 +439,6 @@
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
-            color: rgba(255,255,255,0.85);
         }
 
         .feld input[type="text"],
@@ -516,17 +448,11 @@
         .feld textarea {
             width: 100%;
             padding: 10px;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 14px;
             font-family: Arial, sans-serif;
-            background: rgba(255,255,255,0.08);
-            color: white;
-        }
-
-        .feld input::placeholder,
-        .feld textarea::placeholder {
-            color: rgba(255,255,255,0.3);
+            background: white;
         }
 
         .feld textarea {
@@ -539,7 +465,6 @@
             align-items: flex-start;
             gap: 8px;
             font-weight: normal;
-            color: rgba(255,255,255,0.75);
             cursor: pointer;
         }
 
@@ -554,40 +479,35 @@
 
         .formular-hinweis {
             font-size: 13px;
-            color: rgba(255,255,255,0.85);
             margin-bottom: 20px;
-            border-top: 1px solid rgba(255,255,255,0.15);
-            border-bottom: 1px solid rgba(255,255,255,0.15);
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
             padding: 10px 0;
         }
 
         .absenden {
             width: 100%;
-            padding: 14px;
-            background-color: #FAFAF7;
-            color: #0D0D14;
+            padding: 12px;
+            background-color: #ffcc00;
+            color: #333;
             border: none;
             border-radius: 5px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            letter-spacing: 1px;
             transition: background-color 0.3s;
         }
 
-        .absenden:disabled {
-            opacity: 0.35;
-            cursor: not-allowed;
-        }
-
-        .absenden:not(:disabled):hover {
-            background-color: #E8E5DC;
+        .absenden:hover {
+            background-color: #ffdd44;
         }
 
         /* ==============================
            FAQ
         ============================== */
-
+        #faq {
+            background-color: #f0f0f0;
+        }
 
         .faq-container {
             width: 90%;
@@ -632,7 +552,7 @@
         ============================== */
         #sponsor {
             padding: 20px 20px 50px;
-            background-color: #FAFAF7;
+            background-color: #f0f0f0;
         }
 
         #sponsor img {
@@ -650,7 +570,7 @@
         .zacken-trenner {
             display: block;
             line-height: 0;
-            background-color: #FAFAF7; /* Sponsor-Hintergrund */
+            background-color: #f0f0f0; /* Farbe der Sektion davor (Sponsor) */
         }
 
         .zacken-trenner svg {
@@ -663,8 +583,8 @@
            FOOTER
         ============================== */
         footer {
-            background-color: #E8E5DC;
-            color: #0D0D14;
+            background-color: #b86827;
+            color: white;
             padding: 40px 20px 20px;
             font-size: 15px;
         }
@@ -683,24 +603,19 @@
         }
 
         .footer-block a {
-            color: #4E7896;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .footer-block a:hover {
-            color: #3a5f78;
+            color: white;
             text-decoration: none;
         }
 
         .footer-logo img,
         .footer-spiel-logo img {
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             object-fit: contain;
-        }
-
-        /* STG-Logo im Footer schwärzen (heller Stone-Hintergrund) */
-        .footer-spiel-logo img {
-            filter: brightness(0);
         }
 
         .footer-legal {
@@ -722,7 +637,7 @@
         .legal-btn {
             background: none;
             border: none;
-            color: rgba(13,13,20,0.55);
+            color: rgba(255, 255, 255, 0.7);
             font-size: 13px;
             cursor: pointer;
             padding: 0;
@@ -731,16 +646,16 @@
 
         .legal-btn:hover,
         .legal-btn.aktiv {
-            color: #0D0D14;
+            color: white;
         }
 
         .legal-trenner {
-            color: rgba(13,13,20,0.3);
+            color: rgba(255, 255, 255, 0.4);
             font-size: 13px;
         }
 
         .legal-panel {
-            background-color: rgba(0,0,0,0.07);
+            background-color: rgba(0, 0, 0, 0.12);
             border-radius: 8px;
             margin-top: 8px;
             display: none;
@@ -752,7 +667,7 @@
 
         .legal-inhalt {
             padding: 20px 25px 25px;
-            color: rgba(13,13,20,0.8);
+            color: rgba(255, 255, 255, 0.85);
             font-size: 14px;
             line-height: 1.8;
         }
@@ -764,13 +679,13 @@
 
         .legal-inhalt strong {
             display: block;
-            color: #0D0D14;
+            color: white;
             margin-top: 15px;
             margin-bottom: 4px;
         }
 
         .legal-inhalt a {
-            color: #0D0D14;
+            color: white;
             text-decoration: underline;
         }
 
@@ -787,19 +702,19 @@
             max-width: 1200px;
             width: 100%;
             margin: 0 auto;
-            border-top: 1px solid rgba(13,13,20,0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
             padding-top: 15px;
             text-align: center;
         }
 
         .footer-copyright {
             font-size: 13px;
-            color: rgba(13,13,20,0.5);
+            color: rgba(255, 255, 255, 0.7);
             text-align: center;
         }
 
         .footer-copyright a {
-            color: rgba(13,13,20,0.5);
+            color: rgba(255, 255, 255, 0.7);
         }
 
         .footer-copyright a:hover {
@@ -814,14 +729,12 @@
 
             /* Navigation – Hamburger sicherstellen */
             .nav-container {
-                justify-content: flex-end;
-                padding: 0 15px;
+                justify-content: space-between;
             }
 
             .hamburger {
                 display: flex;
                 order: 2;
-                z-index: 1001;
             }
 
             /* Splash – auf Mobile etwas kürzer */
@@ -875,6 +788,34 @@
             }
         }
 
+        /* ==============================
+           DESKTOP SNAP SCROLLING (min 769px)
+        ============================== */
+        @media (min-width: 769px) {
+            html {
+                scroll-snap-type: y mandatory;
+                scroll-padding-top: 60px;
+            }
+
+            section {
+                scroll-snap-align: start;
+                height: 100vh;
+                overflow-y: auto;
+            }
+
+            #splash {
+                height: 100vh;
+            }
+
+            footer {
+                scroll-snap-align: start;
+                min-height: 100vh;
+            }
+
+            .zacken-trenner {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -974,16 +915,28 @@
         </div>
     </section>
 
+    <!-- Rezensionen -->
+    <section id="rezensionen">
+        <h2>Rezensionen</h2>
+        <div class="rezension">
+            <div class="rezension-foto">👤</div>
+            <div class="rezension-inhalt">
+                <p>Ein super Erlebnis! Die Spiele waren spannend und die Atmosphäre toll.</p>
+                <div class="rezension-autor">– Max Müller</div>
+            </div>
+        </div>
+    </section>
+
     <!-- Anmeldung -->
     <section id="anmeldung">
         <h2>Anmeldung</h2>
         <div class="anmeldung-tabs">
-            <button class="tab-btn aktiv" onclick="wechsleFormular('definitiv')">Definitiv anmelden</button>
+            <button class="tab-btn" onclick="wechsleFormular('definitiv')">Definitiv anmelden</button>
             <button class="tab-btn" onclick="wechsleFormular('schnuppern')">Zum Schnuppern</button>
         </div>
 
         <!-- Definitiv anmelden -->
-        <div id="definitiv-form" class="formular aktiv">
+        <div id="definitiv-form" class="formular">
             <h3>Definitiv anmelden</h3>
             <form>
                 <div class="feld">
@@ -1012,8 +965,8 @@
                 </div>
                 <div class="feld">
                     <label class="checkbox">
-                        <input type="checkbox" name="storno" required>
-                        Ich akzeptiere allfällige Stornogebühren <span class="pflichtfeld">*</span>
+                        <input type="checkbox" name="storno">
+                        Ich akzeptiere allfällige Stornogebühren
                     </label>
                 </div>
                 <div class="feld">
@@ -1041,7 +994,7 @@
                 <div class="formular-hinweis">
                     <strong>Hinweis:</strong> Bitte alle mit <span class="pflichtfeld">*</span> gekennzeichneten Felder ausfüllen.
                 </div>
-                <button type="submit" class="absenden" disabled>Anmelden</button>
+                <button type="submit" class="absenden">Anmelden</button>
             </form>
         </div>
 
@@ -1078,20 +1031,8 @@
                 <div class="formular-hinweis">
                     <strong>Hinweis:</strong> Bitte alle mit <span class="pflichtfeld">*</span> gekennzeichneten Felder ausfüllen.
                 </div>
-                <button type="submit" class="absenden" disabled>Anmelden</button>
+                <button type="submit" class="absenden">Anmelden</button>
             </form>
-        </div>
-    </section>
-
-    <!-- Rezensionen -->
-    <section id="rezensionen">
-        <h2>Rezensionen</h2>
-        <div class="rezension">
-            <div class="rezension-foto">👤</div>
-            <div class="rezension-inhalt">
-                <p>Ein super Erlebnis! Die Spiele waren spannend und die Atmosphäre toll.</p>
-                <div class="rezension-autor">– Max Müller</div>
-            </div>
         </div>
     </section>
 
@@ -1143,7 +1084,7 @@
     <!-- Gezackter Trenner -->
     <div class="zacken-trenner">
         <svg viewBox="0 0 1200 35" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,15 Q100,3 200,15 Q300,27 400,15 Q500,3 600,15 Q700,27 800,15 Q900,3 1000,15 Q1100,27 1200,15 L1200,35 L0,35 Z" fill="#E8E5DC"/>
+            <path d="M0,15 Q100,3 200,15 Q300,27 400,15 Q500,3 600,15 Q700,27 800,15 Q900,3 1000,15 Q1100,27 1200,15 L1200,35 L0,35 Z" fill="#b86827"/>
         </svg>
     </div>
 
@@ -1308,23 +1249,6 @@
             document.querySelector('.nav-menu').classList.toggle('active');
         }
 
-        // Anmelden-Button aktivieren wenn alle Pflichtfelder ausgefüllt
-        (function () {
-            function formPruefen(form) {
-                const btn = form.querySelector('.absenden');
-                const felder = form.querySelectorAll('[required]');
-                const allesOk = Array.from(felder).every(function (f) {
-                    return f.type === 'checkbox' ? f.checked : f.value.trim() !== '';
-                });
-                btn.disabled = !allesOk;
-            }
-
-            document.querySelectorAll('.formular form').forEach(function (form) {
-                form.addEventListener('input', function () { formPruefen(form); });
-                form.addEventListener('change', function () { formPruefen(form); });
-            });
-        }());
-
         // Aktiver Nav-Link beim Scrollen
         (function () {
             const sektionen = document.querySelectorAll('section[id]');
@@ -1343,17 +1267,20 @@
             sektionen.forEach(s => observer.observe(s));
         }());
 
-        // Hero-Shrink beim Scrollen
+        // Hero-Shrink beim Scrollen (nur Mobile)
         (function () {
             const splash = document.getElementById('splash');
 
             function heroAnpassen() {
-                const mobile    = window.innerWidth <= 768;
-                const startVH   = mobile ? 0.6 : 1.0;
-                const endVH     = startVH * 0.5;
-                const range     = window.innerHeight * startVH;
-                const progress  = Math.min(window.scrollY / range, 1);
-                const aktVH     = startVH - (startVH - endVH) * progress;
+                if (window.innerWidth > 768) {
+                    splash.style.height = '100vh';
+                    return;
+                }
+                const startVH  = 0.6;
+                const endVH    = 0.3;
+                const range    = window.innerHeight * startVH;
+                const progress = Math.min(window.scrollY / range, 1);
+                const aktVH    = startVH - (startVH - endVH) * progress;
                 splash.style.height = (aktVH * 100) + 'vh';
             }
 
